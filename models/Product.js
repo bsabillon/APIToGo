@@ -21,6 +21,9 @@ const Product = database.define('product', {
     productCategoryId: {
         type:Sequelize.STRING
     },
+    productName: {
+        type:Sequelize.STRING
+    },
     
 },
 {

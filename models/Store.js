@@ -1,32 +1,26 @@
 const Sequelize = require('sequelize');
 const database = require('../config/database');
 
-const User = database.define('user', {
-    userEmail: {
+const Store = database.define('store', {
+    storeName: {
         type:Sequelize.STRING
     },
-    userName: {
+    storeRTN: {
         type:Sequelize.STRING
     },
-    userLastname: {
+    storePhone: {
         type:Sequelize.STRING
     },
-    userDOB: {
-        type:Sequelize.STRING
-    },
-    userPhone: {
-        type:Sequelize.STRING
-    },
-    userAddress: {
+    storeAddress: {
         type:Sequelize.STRING
     },
     sellerId: {
         type:Sequelize.STRING
     },
-    userPassword: {
+    storeCategory: {
         type:Sequelize.STRING
     },
-    userPictureURL: {
+    storePictureURL: {
         type:Sequelize.STRING
     },
 },
@@ -35,4 +29,4 @@ const User = database.define('user', {
 }
 )
 
-module.exports = User;
+module.exports = Store;

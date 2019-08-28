@@ -1,3 +1,19 @@
 const Sequelize = require('sequelize');
-module.exports  = new Sequelize('postgres://ofsoasjazfznro:8422453c66450cd02fe7a41a3fa1d20882e038ab1345b76bb7ee8cb64102146e@ec2-54-235-246-201.compute-1.amazonaws.com:5432/ddqto13jodnbe6?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory');
+const sequelize = new Sequelize('postgres://biagdrmzjwofew:be6821cc082961e72b52e17aaa523e6158bea954fa0d8b76d31ea731ee8ec8c5@ec2-54-83-9-169.compute-1.amazonaws.com:5432/ddj7m7eaq1ll6i?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory',{
+    host:'ec2-54-83-9-169.compute-1.amazonaws.com',
+    dialect: 'postgres',
+    pool: {
+        max:10,
+        min:0,
+        acquire: 30000,
+        idle: 10000
+    }
+});
 
+
+sequelize.sync({ force: false })
+  .then(() => {
+    console.log(`Database & tables created!`)
+  })
+
+  module.exports  = sequelize;

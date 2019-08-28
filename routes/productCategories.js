@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../config/database');
-const Teacher = require('../models/Teacher');
+const ProductCategory = require('../models/ProductCategory');
 const bodyParser = require('body-parser');
 
 
 
 router.get('/', (request,response)=>
-Teacher.findAll()
-    .then(teachers=>{
-        response.json(teachers);
+ProductCategory.findAll()
+    .then(productCategory=>{
+        response.json(productCategory);
     })
     .catch((error)=>{
         response.send("Error: "+ err)
@@ -19,18 +19,21 @@ Teacher.findAll()
 
 router.post('/add',(request,response)=>{   
 
-    Teacher.create(
+    ProductCategory.create(
         request.body
      )
-     .then(teacher=>{
+     .then(productCategory=>{
         response
         .status(200)
-        .json('{"teacher added successfully"}');
+        .json('{"ProductCategory added successfully"}');
         })
      .catch(error=>
         response.send(error));
     }
     
 );
+
+
+
 
 module.exports = router;
