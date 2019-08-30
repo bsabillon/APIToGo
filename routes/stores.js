@@ -4,8 +4,6 @@ const db = require('../config/database');
 const Store = require('../models/Store');
 const bodyParser = require('body-parser');
 
-
-
 router.get('/', (request,response)=>
 Store.findAll()
     .then(store=>{
@@ -13,8 +11,8 @@ Store.findAll()
     })
     .catch((error)=>{
         response.send("Error: "+ err)
-        })
-        
+        })   
+        .console.log  
 );
 
 router.post('/add',(request,response)=>{   
@@ -32,8 +30,5 @@ router.post('/add',(request,response)=>{
     }
     
 );
-
-
-
 
 module.exports = router;

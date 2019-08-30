@@ -11,9 +11,9 @@ const sequelize = new Sequelize('postgres://biagdrmzjwofew:be6821cc082961e72b52e
 });
 
 
-sequelize.sync({ force: false })
-  .then(() => {
-    console.log(`Database & tables created!`)
-  })
+// sequelize.sync({ force: false })
+//   .then(() => {
+//     //console.log(`Database & tables created!`)
+//   })
 
   module.exports  = sequelize;

@@ -4,8 +4,6 @@ const db = require('../config/database');
 const Teacher = require('../models/Teacher');
 const bodyParser = require('body-parser');
 
-
-
 router.get('/', (request,response)=>
 Teacher.findAll()
     .then(teachers=>{
@@ -14,11 +12,11 @@ Teacher.findAll()
     .catch((error)=>{
         response.send("Error: "+ err)
         })
-        
-);
+        .console.log(teachers)
+ );
 
 router.post('/add',(request,response)=>{   
-
+    
     Teacher.create(
         request.body
      )

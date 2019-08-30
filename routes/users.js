@@ -6,14 +6,8 @@ const bodyParser = require('body-parser');
 
 
 
-router.get('/', (request,response)=>
-User.findAll()
-    .then(users=>{
-        response.json(users);
-    })
-    .catch((error)=>{
-        response.send("Error: "+ err)
-        })
+router.get('/user/:email', (request,response)=>
+    getUserByEmail('${request.params.email}')
         
 );
 
