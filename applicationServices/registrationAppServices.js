@@ -1,7 +1,6 @@
 const express = require('express');
-const router = express.Router();
-const db = require('../config/database');
 const Teacher = require('../models/Teacher');
+const User = require('../models/User');
 const bodyParser = require('body-parser');
 const domainMethods = require('../domainServices/registrationDomainServices');
 
@@ -34,7 +33,36 @@ var methods = {
         .catch(error=>{
            response.send("Error: "+ error)     
             })
+    },
+
+    getUserByEmail: function(request, response){
+        User.findAll({
+            where: {
+                userEmail: request.params.email
+              } 
+        })
+        .then(users=>{
+            response.json(users);
+        })
+        .catch((error)=>{
+            response.send("Error: "+ err)
+            })
+        
+    },
+
+    addUser: function(request, response){
+        User.create(
+            request.body
+         )
+         .then(user=>{
+            response
+            .status(200)
+            .send('user added successfully');
+            })
+         .catch(error=>
+            response.send("Error: "+ error))
     }
+
 
 }
 

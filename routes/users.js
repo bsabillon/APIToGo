@@ -1,15 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../config/database');
-const User = require('../models/User');
-const bodyParser = require('body-parser');
+const methods = require('../applicationServices/registrationAppServices');
 
 
-
-router.get('/user/:email', (request,response)=>
-    getUserByEmail('${request.params.email}')
-        
-);
-
+router.get('/getById/:email?', methods.getUserByEmail);
+router.post('/add',methods.addUser);
 
 module.exports = router;

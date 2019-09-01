@@ -15,7 +15,7 @@ var domainMethods = {
             if(parseInt(teacher.teacherReputation) <= 100 ){
                 resolve("Done")
             }else{
-                reject("fuuck gaballo")
+                reject("Please enter a valid reputation")
             }
             
 

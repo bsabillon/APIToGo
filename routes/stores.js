@@ -3,32 +3,14 @@ const router = express.Router();
 const db = require('../config/database');
 const Store = require('../models/Store');
 const bodyParser = require('body-parser');
+const sellerMethods = require('../applicationServices/sellerAppServices');
 
-router.get('/', (request,response)=>
-Store.findAll()
-    .then(store=>{
-        response.json(store);
-    })
-    .catch((error)=>{
-        response.send("Error: "+ err)
-        })   
-        .console.log  
-);
+router.post('/add',sellerMethods.addStore);
+router.get('/', sellerMethods.getStores);
+router.get('/getByStoreId/:storeId?', sellerMethods.getStoreById);
+router.get('/getByStoreSellerId/:sellerId?', sellerMethods.getStoreBySellerId);
 
-router.post('/add',(request,response)=>{   
 
-    Store.create(
-        request.body
-     )
-     .then(store=>{
-        response
-        .status(200)
-        .json('{"Store added successfully"}');
-        })
-     .catch(error=>
-        response.send(error));
-    }
-    
-);
+
 
 module.exports = router;

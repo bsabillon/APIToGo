@@ -1,0 +1,201 @@
+
+
+//get all category object 
+app.get('/productCategory/', (request, response) =>  {
+    database.any(`SELECT * FROM "productCategory" `)
+    .then((data) => {
+        response.json(data);
+    })
+    .catch((error) => {
+        response.send("ERROR" + error);
+    }) 
+
+});
+
+
+//get product object by categoryId
+app.get('/productCategoryId/:productCategoryId', (request, response) =>  {
+    database.any(`SELECT * FROM "product" WHERE "productCategoryId" = '${request.params.productCategoryId}'`)
+    .then((data) => {
+        response.json(data);
+    })
+    .catch((error) => {
+        response.send("ERROR" + error);
+    }) 
+
+});
+
+
+//get cartDetails object by userId
+app.get('/cartDetailsByUser/:email', (request, response) =>  {
+    database.any(`SELECT "cartDetailsId", "cartQuantity", product."productId", product."productName", product."price", product."productPictureURL" FROM "cartDetails"
+    INNER JOIN "product" ON product."productId" = "cartDetails"."productId"
+	INNER JOIN "cart" ON cart."cartId" = "cartDetails"."cartId"
+	WHERE cart."userEmail" = '${request.params.email}'
+    `)
+    .then((data) => {
+        response.json(data);
+    })
+    .catch((error) => {
+        response.send("ERROR" + error);
+    }) 
+
+});
+
+//update cartDetails quantity by cartDetailsId
+app.put('/updateCartDetailsQuantity/:cartDetailsId/:cartQuantity', (request, response) =>  {
+    database.query(`UPDATE "cartDetails" SET "cartQuantity" = '${request.params.cartQuantity}'
+    WHERE "cartDetailsId" = '${request.params.cartDetailsId}'
+    `,
+    request.body)
+    .then((data) => {
+        response
+        .status(200)
+        .json('{"response" : "quantity updated succesfully!"}');
+    })
+    .catch( (error) => {
+        response.send(error);
+    });
+});
+
+//Delete cartDetails from cart by cartDetailsId
+app.delete('/deleteCartDetails/:cartDetailsId', (request, response) =>  {
+    database.query(`DELETE FROM "cartDetails"
+    WHERE "cartDetailsId" = '${request.params.cartDetailsId}'
+    `,
+    request.body)
+    .then((data) => {
+        response
+        .status(200)
+        .json('{"response" : "quantity deleted succesfully!"}');
+    })
+    .catch( (error) => {
+        response.send(error);
+    });
+});
+
+//get cartId by userEmail
+app.get('/cartIdByUser/:email', (request, response) =>  {
+    database.one(`SELECT "cartId" FROM "cart"
+	WHERE "userEmail" = '${request.params.email}' AND "cartStatusId" = 1
+    `)
+    .then((data) => {
+        response.json(data);
+    })
+    .catch((error) => {
+        response.send("ERROR" + error);
+    }) 
+
+});
+
+//create new cart
+app.post('/newCart', (request, response) => { 
+    database.query('INSERT INTO "cart" (${this:name}) VALUES (${this:csv})',
+    request.body)
+    .then((data) => {
+        response
+        .status(200)
+        .json('{"response" : "cart created succesfully!"}');
+    })
+    .catch( (error) => {
+        response.send(error);
+    });
+});
+
+
+//get productCount by cartId
+app.get('/productCountByCartId/:cartId', (request, response) =>  {
+    database.one(`SELECT COUNT(*)
+    FROM public."cartDetails"
+    WHERE "cartId"=  '${request.params.cartId}'
+    `)
+    .then((data) => {
+        response.json(data);
+    })
+    .catch((error) => {
+        response.send("ERROR" + error);
+    }) 
+
+});
+
+//Add product to cart
+app.post('/addProductToCart', (request, response) => { 
+        
+    database.query('INSERT INTO "cartDetails" (${this:name}) VALUES (${this:csv})',
+    request.body)
+    .then((data) => {
+        response
+        .status(200)
+        .json('{"response" : "product added succesfully!"}');
+    })
+    .catch( (error) => {
+        response.send(error);
+    });
+});
+
+
+
+//Add address
+app.post('/addAddress', (request, response) => { 
+        
+    database.query('INSERT INTO "address" (${this:name}) VALUES (${this:csv})',
+    request.body)
+    .then((data) => {
+        response
+        .status(200)
+        .json('{"response" : "address added succesfully!"}');
+    })
+    .catch( (error) => {
+        response.send(error);
+    });
+});
+
+//get address by userEmail
+app.get('/addressByUser/:userEmail', (request, response) =>  {
+    database.any(`SELECT * FROM "address"
+	WHERE "userEmail" = '${request.params.userEmail}'
+    `)
+    .then((data) => {
+        response.json(data);
+    })
+    .catch((error) => {
+        response.send("ERROR" + error);
+    }) 
+
+});
+
+//Delete address by addressId
+app.delete('/deleteAddress/:addressId', (request, response) =>  {
+    database.query(`DELETE FROM "address"
+    WHERE "addressId" = '${request.params.addressId}'
+    `,
+    request.body)
+    .then((data) => {
+        response
+        .status(200)
+        .json('{"response" : "address deleted succesfully!"}');
+    })
+    .catch( (error) => {
+        response.send(error);
+    });
+});
+
+//get cartDetailsTotal object by userId
+app.get('/cartDetailsTotalByUser/:email', (request, response) =>  {
+    database.any(`SELECT 
+    SUM ("cartQuantity"*product."price") AS total
+    FROM "cartDetails"
+        INNER JOIN "product" ON product."productId" = "cartDetails"."productId"
+        INNER JOIN "cart" ON cart."cartId" = "cartDetails"."cartId"
+        WHERE cart."userEmail" ='${request.params.email}'
+        GROUP BY cart."userEmail" 
+    `)
+    .then((data) => {
+        response.json(data);
+    })
+    .catch((error) => {
+        response.send("ERROR" + error);
+    }) 
+
+});
+
