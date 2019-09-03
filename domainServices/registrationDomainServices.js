@@ -7,8 +7,8 @@ const bodyParser = require('body-parser');
 var domainMethods = {
     validateReputation: function(teacher){
         
-        ok = true;
-        console.log(teacher.teacherName);
+      //  ok = true;
+      //  console.log(teacher.teacherName);
         
         let promise = new Promise(function(resolve, reject) {
            

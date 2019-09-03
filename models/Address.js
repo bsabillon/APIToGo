@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const database = require('../config/database');
 
-const Address = database.define('cartDetail', {
+const Address = database.define('address', {
     userEmail: {
         type:Sequelize.INTEGER
     },
