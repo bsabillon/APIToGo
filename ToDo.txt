@@ -1,16 +1,5 @@
 
 
-//get all category object 
-app.get('/productCategory/', (request, response) =>  {
-    database.any(`SELECT * FROM "productCategory" `)
-    .then((data) => {
-        response.json(data);
-    })
-    .catch((error) => {
-        response.send("ERROR" + error);
-    }) 
-
-});
 
 
 //get product object by categoryId

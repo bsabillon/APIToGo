@@ -18,6 +18,8 @@ database
   });
 
 
+app.use('/addresses',require('./routes/addresses'));
+app.use('/cards',require('./routes/cards'));  
 app.use('/cartDetails',require('./routes/cartDetails'));
 app.use('/carts',require('./routes/carts'));
 app.use('/cartStatus',require('./routes/cartStatus'));

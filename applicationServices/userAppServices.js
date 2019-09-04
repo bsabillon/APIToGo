@@ -1,5 +1,6 @@
 
-const User = require('../models/User');
+const CartStatus = require('../models/CartStatus');
+const Cart = require('../models/Cart');
 const Card = require('../models/Card');
 const bodyParser = require('body-parser');
 const domainMethods = require('../domainServices/sellerDomainServices');
@@ -59,7 +60,50 @@ var userMethods = {
     },
    
 
+    addCartStatus: function(request, response){
+        CartStatus.create(request.body)
+            .then(cartStatus=>{
+                response
+                .status(200)
+                .send('cartStatus added successfully');
+                })
+            .catch(error=>
+                response.send("Error: "+ error))
+    },
 
+    getCartStatus: function(request, response){
+        CartStatus.findAll()
+            .then(cartStatus=>{
+                response.json(cartStatus);
+            })
+            .catch((error)=>{
+                response.send("Error: "+ error)
+                })
+            
+    },
+
+    
+    addCart: function(request, response){
+        CartStatus.create(request.body)
+            .then(cart=>{
+                response
+                .status(200)
+                .send('cart added successfully');
+                })
+            .catch(error=>
+                response.send("Error: "+ error))
+    },
+
+    getCart: function(request, response){
+        Cart.findAll()
+            .then(cart=>{
+                response.json(cart;
+            })
+            .catch((error)=>{
+                response.send("Error: "+ error)
+                })
+            
+    },
 
 
 }

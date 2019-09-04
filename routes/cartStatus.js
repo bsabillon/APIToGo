@@ -6,34 +6,9 @@ const bodyParser = require('body-parser');
 
 
 
-router.get('/', (request,response)=>
-CartStatus.findAll()
-    .then(cartStatus=>{
-        response.json(cartStatus);
-    })
-    .catch((error)=>{
-        response.send("Error: "+ err)
-        })
-        
-);
 
-router.post('/add',(request,response)=>{   
-
-    CartStatus.create(
-        request.body
-     )
-     .then(cartStatus=>{
-        response
-        .status(200)
-        .json('{"cartStatus added successfully"}');
-        })
-     .catch(error=>
-        response.send(error));
-    }
-    
-);
-
-
+router.post('/add',userMethods.addCartStatus);
+router.get('/', userMethods.getCartStatus);
 
 
 module.exports = router;

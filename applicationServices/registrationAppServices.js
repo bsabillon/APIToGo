@@ -17,9 +17,11 @@ var methods = {
     },
 
     addTeacher: function(request, response){
-        domainMethods.validateReputation2(request.body)
-        .then(  
-            response.send("POST: "),
+        if(domainMethods.isReputationValid==false)
+        {
+            return response.send("Invalid reputation");
+        }
+        else{
             Teacher.create(
                 request.body
              )
@@ -30,10 +32,9 @@ var methods = {
                 })
              .catch(error=>
                 response.send("Error: "+ error))
-        )
-        .catch(error=>{
-           response.send("Error: "+ error)     
-        })
+        }
+            
+        
     },
 
     getUserByEmail: function(request, response){

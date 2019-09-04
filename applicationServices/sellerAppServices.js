@@ -1,5 +1,7 @@
 const Seller = require('../models/Seller');
+const Store = require('../models/Store');
 const Product = require('../models/Product');
+const Category = require('../models/Category');
 const bodyParser = require('body-parser');
 const domainMethods = require('../domainServices/sellerDomainServices');
 
@@ -132,6 +134,27 @@ var sellerMethods = {
     },
 
 
+    getCategories: function(request, response){
+        Category.findAll()
+            .then(category=>{
+                response.json(category);
+            })
+            .catch((error)=>{
+                response.send("Error: "+ error)
+                })
+            
+    },
+    
+    addCategory: function(request, response){
+        Category.create(request.body)
+            .then(category=>{
+                response
+                .status(200)
+                .send('product added successfully');
+                })
+            .catch(error=>
+                response.send("Error: "+ error))
+    },
 
 
 }

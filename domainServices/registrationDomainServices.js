@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 
 var domainMethods = {
     
-    validateReputation: function(teacher) {
+    isReputationValid: function(teacher) {
         if(teacher.teacherReputation>100){
             return false;
         }
