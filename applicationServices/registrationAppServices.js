@@ -17,8 +17,9 @@ var methods = {
     },
 
     addTeacher: function(request, response){
-        domainMethods.validateReputation(request.body)
+        domainMethods.validateReputation2(request.body)
         .then(  
+            response.send("POST: "),
             Teacher.create(
                 request.body
              )
@@ -32,7 +33,7 @@ var methods = {
         )
         .catch(error=>{
            response.send("Error: "+ error)     
-            })
+        })
     },
 
     getUserByEmail: function(request, response){
