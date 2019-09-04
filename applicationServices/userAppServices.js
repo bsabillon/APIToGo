@@ -1,7 +1,8 @@
-
+const Card = require('../models/Card');
 const CartStatus = require('../models/CartStatus');
 const Cart = require('../models/Cart');
-const Card = require('../models/Card');
+const Address = require('../models/Address');
+const ProductCategory = require('../models/ProductCategory');
 const bodyParser = require('body-parser');
 const domainMethods = require('../domainServices/sellerDomainServices');
 
@@ -84,7 +85,7 @@ var userMethods = {
 
     
     addCart: function(request, response){
-        CartStatus.create(request.body)
+        Cart.create(request.body)
             .then(cart=>{
                 response
                 .status(200)
@@ -97,7 +98,7 @@ var userMethods = {
     getCart: function(request, response){
         Cart.findAll()
             .then(cart=>{
-                response.json(cart;
+                response.json(cart);
             })
             .catch((error)=>{
                 response.send("Error: "+ error)
@@ -106,6 +107,50 @@ var userMethods = {
     },
 
 
+    addAddress: function(request, response){
+        Address.create(request.body)
+            .then(address=>{
+                response
+                .status(200)
+                .send('address added successfully');
+                })
+            .catch(error=>
+                response.send("Error: "+ error))
+    },
+
+    getAddressByUserEmail: function(request, response){
+        Address.findAll(
+            {
+                where: {
+                    userEmail: request.params.userEmail
+                  } 
+            }
+        )
+            .then(address=>{
+                response.json(address);
+            })
+            .catch((error)=>{
+                response.send("Error: "+ error)
+                })
+            
+    },
+
+    deleteAddress: function(request,response){
+        Address.destroy({
+            where:{
+                id: request.params.AddressId
+            }
+        })
+        .then(address=>{
+            response
+            .status(200)
+            .send('address deleted successfully');
+        })
+        .catch(error=>
+            response.send("Error: "+ error))
+
+    },
+    
 }
 
 module.exports= userMethods;

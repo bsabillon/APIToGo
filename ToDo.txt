@@ -1,20 +1,5 @@
 
 
-
-
-//get product object by categoryId
-app.get('/productCategoryId/:productCategoryId', (request, response) =>  {
-    database.any(`SELECT * FROM "product" WHERE "productCategoryId" = '${request.params.productCategoryId}'`)
-    .then((data) => {
-        response.json(data);
-    })
-    .catch((error) => {
-        response.send("ERROR" + error);
-    }) 
-
-});
-
-
 //get cartDetails object by userId
 app.get('/cartDetailsByUser/:email', (request, response) =>  {
     database.any(`SELECT "cartDetailsId", "cartQuantity", product."productId", product."productName", product."price", product."productPictureURL" FROM "cartDetails"
@@ -77,19 +62,6 @@ app.get('/cartIdByUser/:email', (request, response) =>  {
 
 });
 
-//create new cart
-app.post('/newCart', (request, response) => { 
-    database.query('INSERT INTO "cart" (${this:name}) VALUES (${this:csv})',
-    request.body)
-    .then((data) => {
-        response
-        .status(200)
-        .json('{"response" : "cart created succesfully!"}');
-    })
-    .catch( (error) => {
-        response.send(error);
-    });
-});
 
 
 //get productCount by cartId
@@ -124,21 +96,6 @@ app.post('/addProductToCart', (request, response) => {
 
 
 
-//Add address
-app.post('/addAddress', (request, response) => { 
-        
-    database.query('INSERT INTO "address" (${this:name}) VALUES (${this:csv})',
-    request.body)
-    .then((data) => {
-        response
-        .status(200)
-        .json('{"response" : "address added succesfully!"}');
-    })
-    .catch( (error) => {
-        response.send(error);
-    });
-});
-
 //get address by userEmail
 app.get('/addressByUser/:userEmail', (request, response) =>  {
     database.any(`SELECT * FROM "address"
@@ -153,21 +110,6 @@ app.get('/addressByUser/:userEmail', (request, response) =>  {
 
 });
 
-//Delete address by addressId
-app.delete('/deleteAddress/:addressId', (request, response) =>  {
-    database.query(`DELETE FROM "address"
-    WHERE "addressId" = '${request.params.addressId}'
-    `,
-    request.body)
-    .then((data) => {
-        response
-        .status(200)
-        .json('{"response" : "address deleted succesfully!"}');
-    })
-    .catch( (error) => {
-        response.send(error);
-    });
-});
 
 //get cartDetailsTotal object by userId
 app.get('/cartDetailsTotalByUser/:email', (request, response) =>  {

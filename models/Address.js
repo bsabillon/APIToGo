@@ -3,22 +3,22 @@ const database = require('../config/database');
 
 const Address = database.define('address', {
     userEmail: {
-        type:Sequelize.INTEGER
+        type:Sequelize.STRING
     },
     addressDescription: {
-        type:Sequelize.INTEGER
+        type:Sequelize.STRING
     },
     addressPhone: {
-        type:Sequelize.INTEGER
+        type:Sequelize.STRING
     },
     houseNumber: {
-        type:Sequelize.INTEGER
+        type:Sequelize.STRING
     },
     addressReference: {
-        type:Sequelize.INTEGER
+        type:Sequelize.STRING
     },
     addressAlias: {
-        type:Sequelize.INTEGER
+        type:Sequelize.STRING
     },
 },
 {

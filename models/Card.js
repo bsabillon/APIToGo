@@ -6,19 +6,19 @@ const Card = database.define('card', {
         type:Sequelize.INTEGER
     },
     cardName: {
-        type:Sequelize.INTEGER
+        type:Sequelize.STRING
     },
     cardExpiration: {
-        type:Sequelize.INTEGER
+        type:Sequelize.STRING
     },
     cardCVV: {
         type:Sequelize.INTEGER
     },
     cardDescription: {
-        type:Sequelize.INTEGER
+        type:Sequelize.STRING
     },
     userEmail: {
-        type:Sequelize.INTEGER
+        type:Sequelize.STRING
     },
 },
 {

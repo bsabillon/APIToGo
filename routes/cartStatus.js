@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../config/database');
-const CartStatus = require('../models/CartStatus');
-const bodyParser = require('body-parser');
+const userMethods = require('../applicationServices/userAppServices');
 
 
 

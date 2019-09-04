@@ -1,7 +1,7 @@
 const Seller = require('../models/Seller');
 const Store = require('../models/Store');
 const Product = require('../models/Product');
-const Category = require('../models/Category');
+const ProductCategory = require('../models/ProductCategory');
 const bodyParser = require('body-parser');
 const domainMethods = require('../domainServices/sellerDomainServices');
 
@@ -32,7 +32,7 @@ var sellerMethods = {
     getSellerById: function(request, response){
         Seller.findAll({
             where: {
-                seller: request.params.sellerId
+                id: request.params.sellerId
               } 
         })
         .then(sellers=>{
@@ -133,11 +133,25 @@ var sellerMethods = {
             })
     },
 
+    getProductByCategoryId: function(request, response){
+        Product.findAll({
+            where: {
+                productCategoryId: request.params.productCategoryId
+              } 
+        })
+        .then(product=>{
+            response.json(product);
+        })
+        .catch((error)=>{
+            response.send("Error: "+ error)
+            })
+    },
+
 
     getCategories: function(request, response){
-        Category.findAll()
-            .then(category=>{
-                response.json(category);
+        ProductCategory.findAll()
+            .then(productCategory=>{
+                response.json(productCategory);
             })
             .catch((error)=>{
                 response.send("Error: "+ error)
@@ -146,8 +160,8 @@ var sellerMethods = {
     },
     
     addCategory: function(request, response){
-        Category.create(request.body)
-            .then(category=>{
+        ProductCategory.create(request.body)
+            .then(productCategory=>{
                 response
                 .status(200)
                 .send('product added successfully');

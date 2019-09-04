@@ -8,6 +8,12 @@ const Cart = database.define('cart', {
     cartStatusId: {
         type:Sequelize.STRING
     },
+    addressId: {
+        type:Sequelize.STRING
+    },
+    cardId: {
+        type:Sequelize.STRING
+    },
 },
 {
     freezeTableName: true,

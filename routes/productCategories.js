@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../config/database');
-const ProductCategory = require('../models/ProductCategory');
-const bodyParser = require('body-parser');
+const sellerMethods = require('../applicationServices/sellerAppServices');
 
 
 router.post('/add',sellerMethods.addCategory);
