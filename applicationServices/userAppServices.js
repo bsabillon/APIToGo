@@ -95,7 +95,7 @@ var userMethods = {
                 response.send("Error: "+ error))
     },
 
-    getCart: function(request, response){
+    getCarts: function(request, response){
         Cart.findAll()
             .then(cart=>{
                 response.json(cart);

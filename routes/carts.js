@@ -5,7 +5,7 @@ const userMethods = require('../applicationServices/userAppServices');
 
 
 router.post('/add',userMethods.addCart);
-router.get('/', userMethods.getCart);
+router.get('/', userMethods.getCarts);
 
 
 module.exports = router;
