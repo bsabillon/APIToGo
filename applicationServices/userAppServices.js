@@ -61,6 +61,7 @@ var userMethods = {
     },
    
 
+
     addCartStatus: function(request, response){
         CartStatus.create(request.body)
             .then(cartStatus=>{
@@ -82,6 +83,7 @@ var userMethods = {
                 })
             
     },
+
 
     
     addCart: function(request, response){
@@ -105,6 +107,96 @@ var userMethods = {
                 })
             
     },
+
+    getPendingCartIdByUserEmail: function(request, response){
+        Cart.findAll({
+            attributes:['id'],
+            where:{
+                userEmail: request.params.userEmail,
+                cartStatusId: 1
+            }
+        })
+            .then(cart=>{
+                response.json(cart);
+            })
+            .catch((error)=>{
+                response.send("Error: "+ error)
+                })
+            
+    },
+
+    addAddressCard: function(request,response){
+        Cart.update(
+            {addressId: request.params.addressId, cardId: request.params.cardId},
+            {where: request.params.cartId }
+        )
+        .then(cart=>{
+            response
+            .status(200)
+            .send('Cart updated successfully');
+        })
+        .catch(error=>
+            response.send("Error: "+ error))
+    },
+
+   
+    getProductCountByCartId: function(request, response){
+        CartDetails.findAll({
+            attributes:[[sequelize.fn('COUNT', sequelize.col('id')),'productCount']],
+            where:{
+                cartId: request.params.cartId                
+            }
+        })
+            .then(cart=>{
+                response.json(cart);
+            })
+            .catch((error)=>{
+                response.send("Error: "+ error)
+                })
+            
+    },
+
+    addProductToCart: function(request, response){
+        CartDetails.create(request.body)
+            .then(cartDetails=>{
+                response
+                .status(200)
+                .send('Product added successfully');
+                })
+            .catch(error=>
+                response.send("Error: "+ error))
+    },
+
+    removeProductFromCart: function(request,response){
+        CartDetails.destroy({
+            where:{
+                id: request.params.cartDetailsId
+            }
+        })
+        .then(cartDetails=>{
+            response
+            .status(200)
+            .send('product removed from cart successfully');
+        })
+        .catch(error=>
+            response.send("Error: "+ error))
+
+    },
+
+    updateProductQuantityFromCart: function(request,response){
+        CartDetails.update(
+            {cartQuantity: request.params.cartQuantity},
+            {where: request.params.cartDetailsId }
+        )
+        .then(cartDetails=>{
+            response
+            .status(200)
+            .send('Quantity updated successfully');
+        })
+        .catch(error=>
+            response.send("Error: "+ error))
+    },
+
 
 
     addAddress: function(request, response){
@@ -151,6 +243,9 @@ var userMethods = {
 
     },
     
+
+
+
 }
 
 module.exports= userMethods;

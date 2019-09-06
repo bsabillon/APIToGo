@@ -26,86 +26,6 @@ app.get('/cartDetailsByUser/:email', (request, response) =>  {
 
 });
 
-//update cartDetails quantity by cartDetailsId
-app.put('/updateCartDetailsQuantity/:cartDetailsId/:cartQuantity', (request, response) =>  {
-    database.query(`UPDATE "cartDetails" SET "cartQuantity" = '${request.params.cartQuantity}'
-    WHERE "cartDetailsId" = '${request.params.cartDetailsId}'
-    `,
-    request.body)
-    .then((data) => {
-        response
-        .status(200)
-        .json('{"response" : "quantity updated succesfully!"}');
-    })
-    .catch( (error) => {
-        response.send(error);
-    });
-});
-
-//Delete cartDetails from cart by cartDetailsId
-app.delete('/deleteCartDetails/:cartDetailsId', (request, response) =>  {
-    database.query(`DELETE FROM "cartDetails"
-    WHERE "cartDetailsId" = '${request.params.cartDetailsId}'
-    `,
-    request.body)
-    .then((data) => {
-        response
-        .status(200)
-        .json('{"response" : "quantity deleted succesfully!"}');
-    })
-    .catch( (error) => {
-        response.send(error);
-    });
-});
-
-//get cartId by userEmail
-app.get('/cartIdByUser/:email', (request, response) =>  {
-    database.one(`SELECT "cartId" FROM "cart"
-	WHERE "userEmail" = '${request.params.email}' AND "cartStatusId" = 1
-    `)
-    .then((data) => {
-        response.json(data);
-    })
-    .catch((error) => {
-        response.send("ERROR" + error);
-    }) 
-
-});
-
-
-
-
-//get productCount by cartId
-app.get('/productCountByCartId/:cartId', (request, response) =>  {
-    database.one(`SELECT COUNT(*)
-    FROM public."cartDetails"
-    WHERE "cartId"=  '${request.params.cartId}'
-    `)
-    .then((data) => {
-        response.json(data);
-    })
-    .catch((error) => {
-        response.send("ERROR" + error);
-    }) 
-
-});
-
-//Add product to cart
-app.post('/addProductToCart', (request, response) => { 
-        
-    database.query('INSERT INTO "cartDetails" (${this:name}) VALUES (${this:csv})',
-    request.body)
-    .then((data) => {
-        response
-        .status(200)
-        .json('{"response" : "product added succesfully!"}');
-    })
-    .catch( (error) => {
-        response.send(error);
-    });
-});
-
-
 //get cartDetailsTotal object by userId
 app.get('/cartDetailsTotalByUser/:email', (request, response) =>  {
     database.any(`SELECT 
@@ -150,36 +70,9 @@ app.get('/orderDetailsByUser/:email/:cartStatusId', (request, response) =>  {
 
 });
 
-//update cart status
-app.put('/updateCartStatus/:cartId/:cartStatusId', (request, response) =>  {
-    database.query(`UPDATE "cart" SET "cartStatusId" = '${request.params.cartStatusId}'
-    WHERE "cartId" = '${request.params.cartId}'
-    `,
-    request.body)
-    .then((data) => {
-        response
-        .status(200)
-        .json('{"response" : "cartStatus updated succesfully!"}');
-    })
-    .catch( (error) => {
-        response.send(error);
-    });
-});
 
-//update cart status
-app.put('/updateCart/:cartId/:addressId/:cardId', (request, response) =>  {
-    database.query(`UPDATE "cart" SET
-    "addressId"= '${request.params.addressId}', 
-    "cardId" ='${request.params.cardId}'
-    WHERE "cartId" = '${request.params.cartId}'
-    `,
-    request.body)
-    .then((data) => {
-        response
-        .status(200)
-        .json('{"response" : "cartStatus updated succesfully!"}');
-    })
-    .catch( (error) => {
-        response.send(error);
-    });
-});
+
+
+
+
+

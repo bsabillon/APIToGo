@@ -16,13 +16,13 @@ var domainMethods = {
 
     },
 
-    validateReputation2 : (teacher) => {
+    isReputationValid2 : (teacher) => {
         return new Promise((resolve, reject) => {
 
             if(parseInt(teacher.teacherReputation) < 101){
-                resolve("done");
+                resolve("Valid");
             }else{
-                reject("error");
+                reject("Invalid");
             }
         })
     }

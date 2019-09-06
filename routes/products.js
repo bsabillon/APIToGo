@@ -10,4 +10,9 @@ router.get('/getById/:productId?', sellerMethods.getProductById);
 router.get('/getByCategoryId/:productCategoryId?', sellerMethods.getProductByCategoryId);
 
 
+
+
+
+
+
 module.exports = router;

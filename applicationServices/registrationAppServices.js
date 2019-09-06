@@ -17,11 +17,8 @@ var methods = {
     },
 
     addTeacher: function(request, response){
-        if(domainMethods.isReputationValid==false)
-        {
-            return response.send("Invalid reputation");
-        }
-        else{
+        domainMethods.isReputationValid2(request.body)
+        .then( onResolved =>
             Teacher.create(
                 request.body
              )
@@ -31,8 +28,15 @@ var methods = {
                 .send('teacher added successfully');
                 })
              .catch(error=>
-                response.send("Error: "+ error))
-        }
+                response.send("Error adding: "+ error))
+
+        )
+        .catch(onError =>
+            response.send("Error: "+ onError)
+        )
+      
+          
+       
             
         
     },
