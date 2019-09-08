@@ -68,9 +68,55 @@ app.get('/orderDetailsByUser/:email/:cartStatusId', (request, response) =>  {
         response.send("ERROR" + error);
     });     
 
+
+
+//Create new seller
+app.put('/createSeller/:userEmail', (request, response) =>  {
+    database.query(`UPDATE public."user"
+    SET "sellerId" = (SELECT MAX("user"."sellerId")+1 FROM public."user")
+    WHERE "userEmail" = '${request.params.userEmail}'
+    `,
+    request.body)
+    .then((data) => {
+        response
+        .status(200)
+        .json('{"response" : "user updated succesfully!"}');
+    })
+    .catch( (error) => {
+        response.send(error);
+    });
 });
 
 
+
+//Delete product by productId
+app.delete('/deleteProduct/:productId', (request, response) =>  {
+    database.query(`DELETE FROM "product"
+    WHERE "productId" = '${request.params.productId}'
+    `,
+    request.body)
+    .then((data) => {
+        response
+        .status(200)
+        .json('{"response" : "product deleted succesfully!"}');
+    })
+    .catch( (error) => {
+        response.send(error);
+    });
+});
+
+
+//get product object by storeId
+app.get('/productStoreId/:storeId', (request, response) =>  {
+    database.any(`SELECT * FROM "product" WHERE "storeId" = '${request.params.storeId}'`)
+    .then((data) => {
+        response.json(data);
+    })
+    .catch((error) => {
+        response.send("ERROR" + error);
+    }) 
+
+});
 
 
 

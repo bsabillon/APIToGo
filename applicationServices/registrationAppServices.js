@@ -17,7 +17,7 @@ var methods = {
     },
 
     addTeacher: function(request, response){
-        domainMethods.isReputationValid2(request.body)
+        domainMethods.isReputationValid(request.body)
         .then( onResolved =>
             Teacher.create(
                 request.body
