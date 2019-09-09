@@ -120,7 +120,7 @@ var sellerMethods = {
     },
 
     getProductById: function(request, response){
-        Product.findAll({
+        Product.findOne({
             where: {
                 id: request.params.productId
               } 
