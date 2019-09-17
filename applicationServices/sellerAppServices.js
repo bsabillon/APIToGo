@@ -147,6 +147,37 @@ var sellerMethods = {
             })
     },
 
+    getProductByStoreId: function(request, response){
+        Product.findAll({
+            where: {
+                storeId: request.params.storeId
+              } 
+        })
+        .then(product=>{
+            response.json(product);
+        })
+        .catch((error)=>{
+            response.send("Error: "+ error)
+            })
+    },
+
+    deleteProductbyProductId: function(request,response){
+        Product.destroy({
+            where: {
+                id: request.params.productId
+              } 
+        })
+        .then(product=>{
+            response
+            .status(200)
+            .send('product removed successfully');
+        })
+        .catch(error=>
+            response.send("Error: "+ error))
+    },
+
+
+
 
     getCategories: function(request, response){
         ProductCategory.findAll()

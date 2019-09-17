@@ -29,16 +29,10 @@ var methods = {
                 })
              .catch(error=>
                 response.send("Error adding: "+ error))
-
         )
         .catch(onError =>
             response.send("Error: "+ onError)
-        )
-      
-          
-       
-            
-        
+        )  
     },
 
     getUserByEmail: function(request, response){

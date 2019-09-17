@@ -16,9 +16,7 @@ var domainMethods = {
                 reject("Invalid");
             }
         })
-    }
-    
-    
+    },   
 
 }
 

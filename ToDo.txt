@@ -70,6 +70,10 @@ app.get('/orderDetailsByUser/:email/:cartStatusId', (request, response) =>  {
 
 
 
+
+
+
+
 //Create new seller
 app.put('/createSeller/:userEmail', (request, response) =>  {
     database.query(`UPDATE public."user"
@@ -85,37 +89,6 @@ app.put('/createSeller/:userEmail', (request, response) =>  {
     .catch( (error) => {
         response.send(error);
     });
-});
-
-
-
-//Delete product by productId
-app.delete('/deleteProduct/:productId', (request, response) =>  {
-    database.query(`DELETE FROM "product"
-    WHERE "productId" = '${request.params.productId}'
-    `,
-    request.body)
-    .then((data) => {
-        response
-        .status(200)
-        .json('{"response" : "product deleted succesfully!"}');
-    })
-    .catch( (error) => {
-        response.send(error);
-    });
-});
-
-
-//get product object by storeId
-app.get('/productStoreId/:storeId', (request, response) =>  {
-    database.any(`SELECT * FROM "product" WHERE "storeId" = '${request.params.storeId}'`)
-    .then((data) => {
-        response.json(data);
-    })
-    .catch((error) => {
-        response.send("ERROR" + error);
-    }) 
-
 });
 
 //get cartDetailsTotal and Count  by userId
@@ -166,6 +139,91 @@ app.get('/receivedOrdersByUser/:email', (request, response) =>  {
 
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const registrationDomainServices = require('../domainServices/registrationDomainServices');
+const axios = require('axios');
+
+const functions = {
+fecthUser: () => axios.get('http://localhost:5000/products/GetById/1')
+    .then (res=> res.data)
+    .catch(err => 'error'),
+
+    fecthProduct: () => axios.get('http://localhost:5000/products/GetById/1')
+    .then (res=> res.data)
+    .catch(err => 'error')
+}
+var teacherReputation;
+
+function isLowerThan100(teacherReputation){
+if (teacherReputation<=100){
+    return true;
+}
+else{
+    return false;
+}
+};
+
+test('Reputation is <=100', () => {
+    expect(isLowerThan100(90)).toEqual(true)
+});
+
+test('Reputation is >100', () => {
+    expect(isLowerThan100(101)).toEqual(false)
+});
+
+var user;
+
+function AgeUser(user){
+    if (user>=18){
+        return true;
+    }
+    else{
+        return false;
+    }
+};
+    test('User Age is >=18', () => {
+        expect(AgeUser(18)).toEqual(true)
+    });
+    
+    test('User Age is <=18', () => {
+        expect(AgeUser(17)).toEqual(false)
+    });
+
+ 
+    
+    
+    test('user fetched name should be Leanne Graham', () => {
+        expect.assertions(1);
+        return functions.fecthUser()
+            .then(data => {
+                expect(data.productName).toEqual('Tajadas de platano');
+
+            
+            })
+    });
+
+    test('user fetched name should be Leanne Graham', () => {
+        expect.assertions(1);
+        return functions.fecthProduct()
+            .then(data => {
+                expect(data.id).toBe(1);
+
+            
+            })
+    });
 
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+ // let response = '';
+    // domainMethods.isReputationValid(teacher)
+    // .then( resolve => {
+    //     response = resolve;
+    // }).catch(reject => 
+    // {
+    //     response = reject;
+    // }).finally(()=>{
+    //     expect(response).toBe('Invalid');
+    // }
+    // );

@@ -1,73 +1,35 @@
-const registrationDomainServices = require('../domainServices/registrationDomainServices');
-const axios = require('axios');
+const domainMethods = require('../domainServices/registrationDomainServices');
 
-const functions = {
-fecthUser: () => axios.get('http://localhost:5000/products/GetById/1')
-    .then (res=> res.data)
-    .catch(err => 'error'),
+teacher = 
+{id: 1,
+teacherName: 'Walter',
+teacherLastname: 'Fuentes',
+teacherEmail: 'Fuentes@jimmy',
+teacherAddress: 'SPS',
+teacherPictureURL: 'Nohay',
+teacherReputation: '40' }
 
-    fecthProduct: () => axios.get('http://localhost:5000/products/GetById/1')
-    .then (res=> res.data)
-    .catch(err => 'error')
-}
-var teacherReputation;
 
-function isLowerThan100(teacherReputation){
-if (teacherReputation<=100){
-    return true;
-}
-else{
-    return false;
-}
-};
+// test('reputation should be more than 100', () =>{
+//    return expect(domainMethods.isReputationValid(teacher)).rejects.toBe('Invalid');
+// });   
 
-test('Reputation is <=100', () => {
-    expect(isLowerThan100(90)).toEqual(true)
-});
-
-test('Reputation is >100', () => {
-    expect(isLowerThan100(101)).toEqual(false)
-});
-
-var user;
-
-function AgeUser(user){
-    if (user>=18){
-        return true;
-    }
-    else{
-        return false;
-    }
-};
-    test('User Age is >=18', () => {
-        expect(AgeUser(18)).toEqual(true)
-    });
-    
-    test('User Age is <=18', () => {
-        expect(AgeUser(17)).toEqual(false)
-    });
-
- 
+test('reputation should be less than 100', () =>{
+    return expect(domainMethods.isReputationValid(teacher)).resolves.toBe('Valid');
+ }); 
     
     
-    test('user fetched name should be Leanne Graham', () => {
-        expect.assertions(1);
-        return functions.fecthUser()
-            .then(data => {
-                expect(data.productName).toEqual('Tajadas de platano');
+    
+    // let response = '';
+    // const promise = domainMethods.isReputationValid(teacher);
+    // promise.then( resolve => {
+    //     response = resolve;
+    // }).catch(reject => 
+    // {
+    //     response = reject;
+    // }).finally(()=>{
+    //     expect(response).toBe('Valid');
+    // }
+    // );
 
-            
-            })
-    });
-
-    test('user fetched name should be Leanne Graham', () => {
-        expect.assertions(1);
-        return functions.fecthProduct()
-            .then(data => {
-                expect(data.id).toBe(1);
-
-            
-            })
-    });
-
-
+    
