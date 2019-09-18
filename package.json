@@ -4,7 +4,7 @@
   "description": "ToGo API",
   "main": "app.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watch",
     "testwatch": "jest --watchAll",
     "start": "node app.js",
     "dev": "nodemon app.js"

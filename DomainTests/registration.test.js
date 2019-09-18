@@ -18,18 +18,5 @@ test('reputation should be less than 100', () =>{
     return expect(domainMethods.isReputationValid(teacher)).resolves.toBe('Valid');
  }); 
     
-    
-    
-    // let response = '';
-    // const promise = domainMethods.isReputationValid(teacher);
-    // promise.then( resolve => {
-    //     response = resolve;
-    // }).catch(reject => 
-    // {
-    //     response = reject;
-    // }).finally(()=>{
-    //     expect(response).toBe('Valid');
-    // }
-    // );
 
     
