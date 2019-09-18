@@ -68,12 +68,6 @@ app.get('/orderDetailsByUser/:email/:cartStatusId', (request, response) =>  {
         response.send("ERROR" + error);
     });     
 
-
-
-
-
-
-
 //Create new seller
 app.put('/createSeller/:userEmail', (request, response) =>  {
     database.query(`UPDATE public."user"
@@ -227,3 +221,6 @@ function AgeUser(user){
     //     expect(response).toBe('Invalid');
     // }
     // );
+
+
+(1,2,3,4,5,6,7,8,9,0,' ','!','@','#','$','%','^','&','*','(',')','-','_','=','+')
