@@ -5,36 +5,7 @@ const bodyParser = require('body-parser');
 const domainMethods = require('../domainServices/registrationDomainServices');
 
 var methods = {
-    getTeachers: function(request, response){
-        Teacher.findAll()
-        .then(teachers=>{
-            response.json(teachers);
-        })
-        .catch((error)=>{
-            response.send("Error: "+ err)
-            })
-        
-    },
-
-    addTeacher: function(request, response){
-        domainMethods.isReputationValid(request.body)
-        .then( onResolved =>
-            Teacher.create(
-                request.body
-             )
-             .then(teacher=>{
-                response
-                .status(200)
-                .send('teacher added successfully');
-                })
-             .catch(error=>
-                response.send("Error adding: "+ error))
-        )
-        .catch(onError =>
-            response.send("Error: "+ onError)
-        )  
-    },
-
+    
     getUserByEmail: function(request, response){
         User.findAll({
             where: {

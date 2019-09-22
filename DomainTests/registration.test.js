@@ -1,22 +1,30 @@
 const domainMethods = require('../domainServices/registrationDomainServices');
 
-teacher = 
-{id: 1,
-teacherName: 'Walter',
-teacherLastname: 'Fuentes',
-teacherEmail: 'Fuentes@jimmy',
-teacherAddress: 'SPS',
-teacherPictureURL: 'Nohay',
-teacherReputation: '40' }
+user = 
+{
+id: 1,
+userName: 'Walter',
+userLastname: 'Fuentes',
+userEmail: 'Fuentes@jimmy'
+
+}
 
 
-// test('reputation should be more than 100', () =>{
-//    return expect(domainMethods.isReputationValid(teacher)).rejects.toBe('Invalid');
-// });   
 
-test('reputation should be less than 100', () =>{
-    return expect(domainMethods.isReputationValid(teacher)).resolves.toBe('Valid');
+test('name should contain only letters', () =>{
+    expect(domainMethods.isNameValid(user.userName)).toBe(true);
+ }); 
+
+ test('lastName should contain only letters', () =>{
+    expect(domainMethods.isLastnameValid(user.userLastname)).toBe(true);
+ }); 
+
+ test('email should contain @', () =>{
+    expect(domainMethods.isEmailValid(user.userEmail)).toBe(true);
  }); 
     
+ test('user should pass all the tests', () =>{
+    expect(domainMethods.isUserValid(user)).toBe(true);
+ }); 
 
     
