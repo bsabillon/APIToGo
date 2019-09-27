@@ -30,7 +30,7 @@ var sellerMethods = {
     },
 
     getSellerById: function(request, response){
-        Seller.findAll({
+        Seller.findOne({
             where: {
                 id: request.params.sellerId
               } 
@@ -56,7 +56,11 @@ var sellerMethods = {
     },
 
     getStores: function(request, response){
-        Store.findAll()
+        Store.findAll({
+            include: [{
+                model:Product
+            }]
+        })
             .then(store=>{
                 response.json(store);
             })
@@ -67,7 +71,7 @@ var sellerMethods = {
     },
 
     getStoreById: function(request, response){
-        Store.findAll({
+        Store.findOne({
             where: {
                 id: request.params.storeId
               } 

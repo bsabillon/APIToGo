@@ -1,10 +1,10 @@
 const Sequelize = require('sequelize');
 const database = require('../config/database');
 
+
 const User = database.define('user', {
     userEmail: {
-        type:Sequelize.STRING
-        
+        type:Sequelize.STRING,
     },
     userName: {
         type:Sequelize.STRING

@@ -5,8 +5,8 @@ const Teacher = require('../models/Teacher');
 const bodyParser = require('body-parser');
 const methods = require('../applicationServices/registrationAppServices');
 
-router.get('/', methods.getTeachers);
+//router.get('/', methods.getTeachers);
 
-router.post('/add',methods.addTeacher);
+//router.post('/add',methods.addTeacher);
 
 module.exports = router;

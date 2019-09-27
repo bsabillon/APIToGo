@@ -2,15 +2,16 @@ const Sequelize = require('sequelize');
 const database = require('../config/database');
 
 const Product = database.define('product', {
-   
+    
+
     productDescription: {
         type:Sequelize.STRING
     },
     price: {
-        type:Sequelize.STRING
+        type:Sequelize.INTEGER
     },
     storeId: {
-        type:Sequelize.STRING
+        type:Sequelize.INTEGER
     },
     productQuantity: {
         type:Sequelize.STRING

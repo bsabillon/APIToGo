@@ -1,7 +1,9 @@
 const Sequelize = require('sequelize');
 const database = require('../config/database');
+const Product = require('../models/Product');
 
 const Store = database.define('store', {
+    
     storeName: {
         type:Sequelize.STRING
     },
@@ -28,5 +30,7 @@ const Store = database.define('store', {
     freezeTableName: true,
 }
 )
+
+Store.hasMany(Product);
 
 module.exports = Store;

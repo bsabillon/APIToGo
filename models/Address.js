@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const database = require('../config/database');
 
 const Address = database.define('address', {
+
     userEmail: {
         type:Sequelize.STRING
     },
